@@ -4,7 +4,9 @@
       <div slot="center">购物街</div>
     </nav-bar>
     <!--轮播图-->
-    <home-swiper :banner="banner"></home-swiper>
+    <home-swiper :banners="banners"></home-swiper>
+    <!--相关图-->
+    <recommend-view :recommends="recommends"></recommend-view>
   </div>
 </template>
 
@@ -12,6 +14,7 @@
 
 import NavBar from "components/common/navbar/NavBar";
 import HomeSwiper from "./childComps/HomeSwiper";
+import RecommendView from "./childComps/RecommendView";
 
 import {getHomeMultidata} from "network/home";
 
@@ -20,27 +23,26 @@ export default {
   // 注册相关组件
   components: {
     NavBar,
-    HomeSwiper
+    HomeSwiper,
+    RecommendView
   },
   data() {
     return {
-      result: {
-        banner: [],
-        dKeyword: [],
-        keywords: [],
-        recommend: []
-      }
+        banners: [],
+        recommends: [],
+        dKeywords: [],
+        keywordss: [],
     }
   },
   /*组件创建成功的钩子函数*/
   created() {
     // 获取首页相关轮的数据
     getHomeMultidata().then(res => {
-      // console.log(res);
-      this.result.banner = res.data.banner.list;
-      this.result.dKeyword = res.data.dKeyword.list;
-      this.result.keywords = res.data.keywords.list;
-      this.result.recommend = res.data.recommend.list;
+      console.log(res);
+      this.banners = res.data.banner.list;
+      this.dKeywords = res.data.dKeyword.list;
+      this.keywordss = res.data.keywords.list;
+      this.recommends = res.data.recommend.list;
     }).catch(err => {
       console.log(err);
     })
