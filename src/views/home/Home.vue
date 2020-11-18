@@ -3,20 +3,29 @@
     <nav-bar class="home-nva">
       <div slot="center">购物街</div>
     </nav-bar>
-
+    <swiper>
+      <swiper-item v-for="itme in banner">
+        <a v-bind:href="itme.link">
+          <img v-bind:src="itme.image" alt="">
+        </a>
+      </swiper-item>
+    </swiper>
   </div>
 </template>
 
 <script>
 
 import NavBar from "components/common/navbar/NavBar";
+import {Swiper, SwiperItem} from 'components/common/swiper';
 import {getHomeMultidata} from "network/home";
 
 export default {
   name: "Home",
   // 注册相关组件
   components: {
-    NavBar
+    NavBar,
+    Swiper,
+    SwiperItem
   },
   data() {
     return {
