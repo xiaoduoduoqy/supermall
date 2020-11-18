@@ -28,6 +28,7 @@ export default {
 .recommend {
   display: flex;
   width: 100%;
+  text-align: center;
 }
 
 .recommend-itme {
@@ -37,5 +38,6 @@ export default {
 .recommend-itme img {
   width: 65px;
   height: 65px;
+
 }
 </style>
