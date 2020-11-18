@@ -21,7 +21,7 @@ export function request(config) {
     // console.log(res);
     //1.在加入相应成功关闭相关动画
     //2.处理相关结果
-    return res;//拦截过后还要返回相关的res
+    return res.data;//拦截过后还要返回相关的res
   }, error => {
     // console.log(error);
   })
