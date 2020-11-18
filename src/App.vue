@@ -7,9 +7,9 @@
 
 <script>
 import MianTabbar from "components/content/mianTabbar/MianTabbar";
+
 export default {
   name: 'App',
-
   components: {MianTabbar}
 }
 </script>
