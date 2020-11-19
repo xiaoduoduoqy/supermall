@@ -1,30 +1,23 @@
 <template>
   <div class="home-feature">
-    <a :href="imghref"></a>
-    <img src="~assets/img/home/recommend_bg.jpg">
+    <a href="https://www.baidu.com/">
+      <img src="~assets/img/home/recommend_bg.jpg">
+    </a>
   </div>
 </template>
 
 <script>
 export default {
   name: "HomeFeatureView",
-  props: {
-    imghref: {
-      type: String,
-      default() {
-        return ''
-      },
-      request: true
-    }
-  }
 }
 </script>
 
 <style scoped>
-.home-feature{
+.home-feature {
   height: 70px;
 }
-.home-feature img{
+
+.home-feature img {
   width: 100%;
 }
 </style>

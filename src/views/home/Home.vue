@@ -8,7 +8,9 @@
     <!--相关图-->
     <recommend-view :recommends="recommends"></recommend-view>
     <!--中间部分图片加载-->
-    <home-feature-view :imghref="imghref"></home-feature-view>
+    <home-feature-view ></home-feature-view>
+    <!--一个分类-->
+
   </div>
 </template>
 
@@ -32,7 +34,6 @@ export default {
   },
   data() {
     return {
-      imghref: 'https://www.baidu.com/',
       banners: [],
       recommends: [],
       dKeywords: [],
