@@ -91,7 +91,7 @@ export default {
     //1获取首页相关轮的数据
     this.getHomeMultidata();
     //2获取流行,新款，精选相关数据
-    this.getGoodsHomedata();
+    this.getGoodsHomedata('pop');
   },
   methods: {
     //1获取首页相关轮的数据
@@ -104,11 +104,32 @@ export default {
         console.log(err);
       })
     },
+
     //2获取流行,新款，精选相关数据
-    getGoodsHomedata() {
-      getGoodsHomedata(0, 'pop').then(res => {
+    getGoodsHomedata(type) {
+      const page = this.goods[type].page + 1;
+      alert(page);
+      getGoodsHomedata(type,page).then(res => {
+        console.log(res);
+        switch (type) {
+          case 'pop':
+            this.goods.pop.page = page;
+            this.goods.pop.list.push(res.data.list);
+            break;
+          case 'new':
+            this.goods.new.page = page;
+            this.goods.new.list.push(res.data.list);
+            break;
+          case 'sell':
+            this.goods.sell.page = page;
+            this.goods.sell.list.push(res.data.list);
+            break;
+        }
+      }).catch(err => {
+        console.log(err);
       })
     },
+
     // tab-control组件返回的函数
     hometabClick(index) {
     }
