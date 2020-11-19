@@ -7,6 +7,8 @@
     <home-swiper :banners="banners"></home-swiper>
     <!--相关图-->
     <recommend-view :recommends="recommends"></recommend-view>
+    <!--中间部分图片加载-->
+    <home-feature-view :imghref="imghref"></home-feature-view>
   </div>
 </template>
 
@@ -15,6 +17,7 @@
 import NavBar from "components/common/navbar/NavBar";
 import HomeSwiper from "./childComps/HomeSwiper";
 import RecommendView from "./childComps/RecommendView";
+import HomeFeatureView from "./childComps/HomeFeatureView";
 
 import {getHomeMultidata} from "network/home";
 
@@ -24,14 +27,16 @@ export default {
   components: {
     NavBar,
     HomeSwiper,
-    RecommendView
+    RecommendView,
+    HomeFeatureView
   },
   data() {
     return {
-        banners: [],
-        recommends: [],
-        dKeywords: [],
-        keywordss: [],
+      imghref: 'https://www.baidu.com/',
+      banners: [],
+      recommends: [],
+      dKeywords: [],
+      keywordss: [],
     }
   },
   /*组件创建成功的钩子函数*/
