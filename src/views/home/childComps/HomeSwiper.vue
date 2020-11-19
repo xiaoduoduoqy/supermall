@@ -15,15 +15,16 @@ export default {
   name: "HomeSwiper",
   components: {
     Swiper,
-    SwiperItem
+    SwiperItem,
+    SwiperCopy
   },
   props: {
     banners: {
       type: Array,
       default() {
-        return []
+        return ['1','2','3','4']
       },
-      requried: true,
+      // requried: true,
     }
   }
 }

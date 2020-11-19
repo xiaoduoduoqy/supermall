@@ -4,9 +4,9 @@
       <div slot="center">购物街</div>
     </nav-bar>
     <!--轮播图-->
-    <home-swiper :banners="banners"></home-swiper>
+    <home-swiper ></home-swiper>
     <!--相关图-->
-    <recommend-view :recommends="recommends"></recommend-view>
+<!--    <recommend-view :recommends="recommends"></recommend-view>-->
   </div>
 </template>
 
@@ -38,7 +38,7 @@ export default {
   created() {
     // 获取首页相关轮的数据
     getHomeMultidata().then(res => {
-      console.log(res);
+      // console.log(res);
       this.banners = res.data.banner.list;
       this.dKeywords = res.data.dKeyword.list;
       this.keywordss = res.data.keywords.list;
