@@ -4,9 +4,9 @@
       <div slot="center">购物街</div>
     </nav-bar>
     <!--轮播图-->
-    <home-swiper ></home-swiper>
+    <home-swiper :banners="banners"></home-swiper>
     <!--相关图-->
-<!--    <recommend-view :recommends="recommends"></recommend-view>-->
+    <recommend-view :recommends="recommends"></recommend-view>
   </div>
 </template>
 
