@@ -13,11 +13,9 @@ export default {
 </script>
 
 <style scoped>
-.home-feature {
-  height: 70px;
-}
 
 .home-feature img {
   width: 100%;
+  /*height: 300px;*/
 }
 </style>
