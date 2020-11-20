@@ -1,6 +1,6 @@
 <template>
-  <div class="goods-list" v-for="itme in goodslist">
-    <goods-list-item :goodItem="itme"></goods-list-item>
+  <div class="goods-list" >
+    <goods-list-item v-for="itme in goodslist" :goodItem="itme"></goods-list-item>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
     goodslist: {
       type: Array,
       default() {
-        return []
+        return [{},{},{},{}]
       },
       request: false
     },
