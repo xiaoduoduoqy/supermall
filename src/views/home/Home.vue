@@ -7,7 +7,7 @@
     <recommend-view :recommends="recommends"></recommend-view>
     <home-feature-view></home-feature-view>
     <tab-control class="home-tab-control" :tabtitle="['流行', '新款', '精选']" @tabClick="backtabClick"></tab-control>
-    <goods-list ></goods-list>
+    <goods-list :goodslist="showGoodsData"></goods-list>
     <ul>
       <li>1</li>
       <li>1</li>
@@ -94,11 +94,11 @@ export default {
   /*组件创建成功的钩子函数*/
   created() {
     //1获取首页相关轮的数据
-    // this.getHomeMultidata();
+    this.getHomeMultidata();
     //2获取流行,新款，精选相关数据
-    // this.getGoodsHomedata('pop');
-    // this.getGoodsHomedata('new');
-    // this.getGoodsHomedata('sell');
+    this.getGoodsHomedata('pop');
+    this.getGoodsHomedata('new');
+    this.getGoodsHomedata('sell');
   },
   /*计算属性*/
   computed: {
@@ -123,8 +123,8 @@ export default {
     getGoodsHomedata(type) {
       const page = this.goods[type].page + 1;
       getGoodsHomedata(type, page).then(res => {
-        // console.log(res);
-        this.goods[type].list = res.data.list;
+        console.log(res);
+        this.goods[type].list.push(...res.data.list)
         this.goods[type].page = res.page
       }).catch(err => {
         console.log(err);
