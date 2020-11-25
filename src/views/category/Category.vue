@@ -121,10 +121,22 @@ export default {
   mounted() {
     //创建better-scroll对象
     let bs=new BScroll('.wrapper',{
-
+      probeType:3,
+      pullUpLoad:true
     });
     // 用一个变量进行接收
     this.scroll=bs;
+    // 监听滚动位置方法
+    this.scroll.on('scroll',(position)=>{
+      // console.log(position);
+    })
+    // 加载更多
+    this.scroll.on('pullingUp',()=>{
+      console.log('加载更多');
+      setTimeout(()=>{
+        bs.finishPullUp();
+      },2000)
+    })
   }
 }
 </script>

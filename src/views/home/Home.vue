@@ -3,54 +3,13 @@
     <nav-bar class="home-nva">
       <div slot="center">购物街</div>
     </nav-bar>
-    <home-swiper :banners="banners"></home-swiper>
-    <recommend-view :recommends="recommends"></recommend-view>
-    <home-feature-view></home-feature-view>
-    <tab-control class="home-tab-control" :tabtitle="['流行', '新款', '精选']" @tabClick="backtabClick"></tab-control>
-    <goods-list :goodslist="showGoodsData"></goods-list>
-    <ul>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-
-
-    </ul>
+    <scroll class="content">
+      <home-swiper :banners="banners"></home-swiper>
+      <recommend-view :recommends="recommends"></recommend-view>
+      <home-feature-view></home-feature-view>
+      <tab-control class="home-tab-control" :tabtitle="['流行', '新款', '精选']" @tabClick="backtabClick"></tab-control>
+      <goods-list :goodslist="showGoodsData"></goods-list>
+    </scroll>
   </div>
 </template>
 
@@ -64,6 +23,7 @@ import HomeFeatureView from "./childComps/HomeFeatureView";
 import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
+import Scroll from "components/common/scroll/Scroll";
 
 import {getHomeMultidata, getGoodsHomedata} from "network/home";
 
@@ -77,6 +37,7 @@ export default {
     NavBar,
     TabControl,
     GoodsList,
+    Scroll
   },
   data() {
     return {
@@ -157,7 +118,9 @@ export default {
 
 <style scoped>
 #home {
-  padding-top: 44px;
+  /*padding-top: 44px;*/
+  height: 100vh;
+  position: relative;
 }
 
 .home-nva {
@@ -176,4 +139,19 @@ export default {
   top: 43px; /*顶部navbar的高度*/
   z-index: 9;
 }
+.content{
+  height:300px;
+  overflow: hidden;
+  position: absolute;
+  top: 44px;
+  bottom: 49px;
+  left: 0;
+  right: 0;
+}
+/*.content{*/
+/*  height: cla;*/
+/*  overflow: hidden;*/
+/*  height:calc(100% - 93px);*/
+/*  margin-top: 44px;*/
+/*}*/
 </style>
