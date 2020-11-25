@@ -3,7 +3,7 @@
     <img :src="goodItem.show.img" alt="">
     <div class="goods-info">
       <p>{{ goodItem.title }}</p>
-      <span class="price">{{  goodItem.orgPrice }}</span>
+      <span class="price">{{ goodItem.orgPrice }}</span>
       <span class="collect">{{ goodItem.cfav }}</span>
     </div>
   </div>
@@ -34,7 +34,7 @@ export default {
   width: 100%;
   border-radius: 5px;
   height: 278.5px;
-  border:2px solid var(--color-tint);
+  border: 2px solid var(--color-tint);
 }
 
 .goods-info {

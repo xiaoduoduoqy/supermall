@@ -87,7 +87,7 @@ export default {
         'new': {page: 0, list: []},
         'sell': {page: 0, list: []}
       },
-      currentType: 'pop',
+      currentType: 'pop',//默认当前类型
 
     }
   },
@@ -102,12 +102,16 @@ export default {
   },
   /*计算属性*/
   computed: {
+    //获取当前展示的相关数据
     showGoodsData() {
       return this.goods[this.currentType].list;
     }
   },
   /*定义相关方法*/
   methods: {
+    /**
+     * 网络请求相关方法
+     */
     //1获取首页相关轮的数据
     getHomeMultidata() {
       getHomeMultidata().then(res => {
@@ -130,6 +134,9 @@ export default {
         console.log(err);
       })
     },
+    /**
+     *事件监听的相关方法
+     */
     // tab-control组件返回的函数
     backtabClick(index) {
       switch (index) {
@@ -141,6 +148,7 @@ export default {
           break;
         case 2:
           this.currentType = 'sell'
+          break;
       }
     }
   }
