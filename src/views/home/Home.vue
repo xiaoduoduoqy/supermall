@@ -4,7 +4,12 @@
       <div slot="center">购物街</div>
     </nav-bar>
 
-    <scroll class="content" ref='aaa' :probe-type="3" @scroll="backscroll">
+    <scroll class="content"
+            ref='aaa'
+            :probe-type="3"
+            :pull-up-load="true"
+            @scroll="backscroll"
+            @pullingUp="backpullingUp">
       <home-swiper :banners="banners"></home-swiper>
       <recommend-view :recommends="recommends"></recommend-view>
       <home-feature-view></home-feature-view>
@@ -95,9 +100,9 @@ export default {
     getGoodsHomedata(type) {
       const page = this.goods[type].page + 1;
       getGoodsHomedata(type, page).then(res => {
-        console.log(res);
+        // console.log(res);
         this.goods[type].list.push(...res.data.list)
-        this.goods[type].page = res.page
+        this.goods[type].page = res.data.page;
       }).catch(err => {
         console.log(err);
       })
@@ -143,6 +148,11 @@ export default {
       } else {
         this.isactive = false;
       }
+    },
+    backpullingUp() {
+      console.log('加载更多');
+      this.getGoodsHomedata(this.currentType);
+      this.$refs.aaa.finishPullUp();
     }
   }
 }

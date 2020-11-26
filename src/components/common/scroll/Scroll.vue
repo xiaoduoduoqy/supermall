@@ -17,6 +17,12 @@ export default {
       default() {
         return 0
       },
+    },
+    pullUpLoad:{
+      type:Boolean,
+      default() {
+        return false;
+      }
     }
   },
   data() {
@@ -29,18 +35,26 @@ export default {
     this.scroll = new BScroll(this.$refs.wrapper, {
       probeType: this.probeType,
       click: true,
-      pullUpLoad: true
+      pullUpLoad: this.pullUpLoad
     });
     // 监听滚动的位置
-    this.scroll.on('scroll',(position)=>{
+    this.scroll.on('scroll', (position) => {
       // 将相关参数通过函数传给父组件
-      this.$emit('scroll',position)
-    })
+      this.$emit('scroll', position)
+    });
+    // 监听加载更多
+    this.scroll.on('pullingUp', () => {
+      // 将相关参数通过函数传给父组件
+      this.$emit('pullingUp');
+    });
   },
   methods: {
     scrollTo(x, y, time = 300) {
       //better-scrollc返回定点的方法scrollTo（x,y,time）
       this.scroll.scrollTo(x, y, time);
+    },
+    finishPullUp(){
+      this.scroll.finishPullUp();
     }
   }
 }
