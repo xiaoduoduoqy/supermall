@@ -3,7 +3,7 @@
     <nav-bar class="home-nva">
       <div slot="center">购物街</div>
     </nav-bar>
-    <scroll class="content" ref='aaa'>
+    <scroll class="content" ref='aaa' >
       <home-swiper :banners="banners"></home-swiper>
       <recommend-view :recommends="recommends"></recommend-view>
       <home-feature-view></home-feature-view>
@@ -128,7 +128,6 @@ export default {
     //   // 直接调用better-scroll里面methods里面的函数
     //   this.$refs.aaa.showMessage();
     // },
-
     // 但是我们可以直接采用native监听组件根元素的原生事件
     TopClick() {
       this.$refs.aaa.scrollTo(0,0,300);

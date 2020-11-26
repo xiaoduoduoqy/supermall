@@ -19,6 +19,7 @@ export default {
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper, {
       probeType: 3,
+      click:true,
       pullUpLoad: true
     });
   },
