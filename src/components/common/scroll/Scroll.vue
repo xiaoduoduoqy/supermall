@@ -1,9 +1,9 @@
 <template>
-<div class="wrapper" ref="wrapper">
-  <div class="content">
-    <slot></slot>
+  <div class="wrapper" ref="wrapper">
+    <div class="content">
+      <slot></slot>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -13,7 +13,7 @@ export default {
   name: "Scroll",
   data() {
     return {
-      scroll: '',
+      scroll: null,
     }
   },
   mounted() {
@@ -21,7 +21,12 @@ export default {
       probeType: 3,
       pullUpLoad: true
     });
-
+  },
+  methods: {
+    scrollTo(x, y, time = 300) {
+      //better-scrollc返回定点的方法scrollTo（x,y,time）
+      this.scroll.scrollTo(x, y, time);
+    }
   }
 }
 </script>

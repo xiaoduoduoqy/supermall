@@ -3,13 +3,17 @@
     <nav-bar class="home-nva">
       <div slot="center">购物街</div>
     </nav-bar>
-    <scroll class="content">
+    <scroll class="content" ref='aaa'>
       <home-swiper :banners="banners"></home-swiper>
       <recommend-view :recommends="recommends"></recommend-view>
       <home-feature-view></home-feature-view>
       <tab-control class="home-tab-control" :tabtitle="['流行', '新款', '精选']" @tabClick="backtabClick"></tab-control>
       <goods-list :goodslist="showGoodsData"></goods-list>
     </scroll>
+    <!--采用子组件的返回方法-->
+    <!--<back-top @backTopClick="backTop" ></back-top>-->
+    <back-top @click.native="TopClick"></back-top>
+    <!--直接采用native监听组件根元素的原生事件-->
   </div>
 </template>
 
@@ -24,6 +28,7 @@ import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 import Scroll from "components/common/scroll/Scroll";
+import BackTop from "components/content/backTop/BackTop";
 
 import {getHomeMultidata, getGoodsHomedata} from "network/home";
 
@@ -37,7 +42,8 @@ export default {
     NavBar,
     TabControl,
     GoodsList,
-    Scroll
+    Scroll,
+    BackTop
   },
   data() {
     return {
@@ -96,7 +102,7 @@ export default {
       })
     },
     /**
-     *事件监听的相关方法
+     *事件监听子组件返回的相关方法
      */
     // tab-control组件返回的函数
     backtabClick(index) {
@@ -111,6 +117,21 @@ export default {
           this.currentType = 'sell'
           break;
       }
+    },
+    //back-top组件返回的函数
+    // backTop() {
+    //   // 父组件获取子组件对象$children和$refs
+    //   // console.log(this.$children);
+    //   // console.log(this.$refs.aaa);
+    //   //可以直接取相关的值
+    //   // console.log(this.$refs.aaa.scroll);
+    //   // 直接调用better-scroll里面methods里面的函数
+    //   this.$refs.aaa.showMessage();
+    // },
+
+    // 但是我们可以直接采用native监听组件根元素的原生事件
+    TopClick() {
+      this.$refs.aaa.scrollTo(0,0,300);
     }
   }
 }
@@ -135,12 +156,13 @@ export default {
 
 .home-tab-control {
   /*两个要混合使用*/
-  position: sticky;
+  /*position: sticky;*/
   top: 43px; /*顶部navbar的高度*/
   z-index: 9;
 }
-.content{
-  height:300px;
+
+.content {
+  height: 300px;
   overflow: hidden;
   position: absolute;
   top: 44px;
@@ -148,6 +170,7 @@ export default {
   left: 0;
   right: 0;
 }
+
 /*.content{*/
 /*  height: cla;*/
 /*  overflow: hidden;*/
