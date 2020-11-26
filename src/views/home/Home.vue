@@ -3,7 +3,8 @@
     <nav-bar class="home-nva">
       <div slot="center">购物街</div>
     </nav-bar>
-    <scroll class="content" ref='aaa' >
+
+    <scroll class="content" ref='aaa' :probe-type="3" @scroll="backscroll">
       <home-swiper :banners="banners"></home-swiper>
       <recommend-view :recommends="recommends"></recommend-view>
       <home-feature-view></home-feature-view>
@@ -12,7 +13,7 @@
     </scroll>
     <!--采用子组件的返回方法-->
     <!--<back-top @backTopClick="backTop" ></back-top>-->
-    <back-top @click.native="TopClick"></back-top>
+    <back-top @click.native="TopClick" v-show="isactive"></back-top>
     <!--直接采用native监听组件根元素的原生事件-->
   </div>
 </template>
@@ -55,7 +56,7 @@ export default {
         'sell': {page: 0, list: []}
       },
       currentType: 'pop',//默认当前类型
-
+      isactive: false
     }
   },
   /*组件创建成功的钩子函数*/
@@ -128,9 +129,20 @@ export default {
     //   // 直接调用better-scroll里面methods里面的函数
     //   this.$refs.aaa.showMessage();
     // },
+
     // 但是我们可以直接采用native监听组件根元素的原生事件
     TopClick() {
-      this.$refs.aaa.scrollTo(0,0,300);
+      this.$refs.aaa.scrollTo(0, 0, 300);
+    },
+
+    // BScroll组件返回的函数
+    backscroll(position) {
+      // console.log(position);
+      if (position.y < -2000) {
+        this.isactive = true;
+      } else {
+        this.isactive = false;
+      }
     }
   }
 }
@@ -155,25 +167,24 @@ export default {
 
 .home-tab-control {
   /*两个要混合使用*/
-  /*position: sticky;*/
-  top: 43px; /*顶部navbar的高度*/
+  position: sticky;
+  top: 44px; /*顶部navbar的高度*/
   z-index: 9;
 }
 
+/*.content {*/
+/*  overflow: hidden;*/
+/*  position: absolute;*/
+/*  top: 44px;*/
+/*  bottom: 49px;*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*}*/
+
 .content {
-  height: 300px;
   overflow: hidden;
-  position: absolute;
-  top: 44px;
-  bottom: 49px;
-  left: 0;
-  right: 0;
+  height: calc(100% - 93px);
+  margin-top: 44px;
 }
 
-/*.content{*/
-/*  height: cla;*/
-/*  overflow: hidden;*/
-/*  height:calc(100% - 93px);*/
-/*  margin-top: 44px;*/
-/*}*/
 </style>

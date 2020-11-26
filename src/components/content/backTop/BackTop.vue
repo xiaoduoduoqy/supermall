@@ -21,7 +21,7 @@ export default {
 <style scoped>
 .back-top {
   position: fixed;
-  right: 8px;
+  right: 23px;
   bottom: 55px;
 }
 
