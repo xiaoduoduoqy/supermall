@@ -150,7 +150,7 @@ export default {
       }
     },
     backpullingUp() {
-      console.log('加载更多');
+      // console.log('加载更多');
       this.getGoodsHomedata(this.currentType);
       this.$refs.aaa.finishPullUp();
     }

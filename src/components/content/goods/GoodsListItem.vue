@@ -1,6 +1,6 @@
 <template>
   <div class="goods-list-item">
-    <img :src="goodItem.show.img" alt="">
+    <img :src="goodItem.show.img" alt="" @load="imageLoad">
     <div class="goods-info">
       <p>{{ goodItem.title }}</p>
       <span class="price">{{ goodItem.orgPrice }}</span>
@@ -18,6 +18,11 @@ export default {
       default() {
         return {}
       }
+    }
+  },
+  methods: {
+    imageLoad() {
+      this.$parent.refresh();
     }
   }
 }

@@ -18,8 +18,8 @@ export default {
         return 0
       },
     },
-    pullUpLoad:{
-      type:Boolean,
+    pullUpLoad: {
+      type: Boolean,
       default() {
         return false;
       }
@@ -47,6 +47,7 @@ export default {
       // 将相关参数通过函数传给父组件
       this.$emit('pullingUp');
     });
+
   },
 
   methods: {
@@ -54,8 +55,13 @@ export default {
       //better-scrollc返回定点的方法scrollTo（x,y,time）
       this.scroll.scrollTo(x, y, time);
     },
-    finishPullUp(){
+    finishPullUp() {
+      // 在加载一次之后调用这个可以再次加载更多
       this.scroll.finishPullUp();
+    },
+    refresh() {
+      //从新加载better-scrollc滚动高度
+      this.scroll.refresh();
     }
   }
 }
