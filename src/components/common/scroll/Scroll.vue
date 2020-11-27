@@ -48,6 +48,7 @@ export default {
       this.$emit('pullingUp');
     });
   },
+
   methods: {
     scrollTo(x, y, time = 300) {
       //better-scrollc返回定点的方法scrollTo（x,y,time）
