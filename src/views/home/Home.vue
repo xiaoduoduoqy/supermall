@@ -37,6 +37,7 @@ import Scroll from "components/common/scroll/Scroll";
 import BackTop from "components/content/backTop/BackTop";
 
 import {getHomeMultidata, getGoodsHomedata} from "network/home";
+import {debounce} from "common/utils"
 
 export default {
   name: "Home",
@@ -76,7 +77,7 @@ export default {
   /*el已经渲染完成并挂载到实例上*/
   mounted() {
     //3监听item中图片加载完成加入防抖动
-    const refresh = this.debounce(this.$refs.aaa.refresh,50)
+    const refresh = debounce(this.$refs.aaa.refresh,50)
     this.$bus.$on('itemImageLoad', () => {
       refresh();
     })
@@ -90,20 +91,6 @@ export default {
   },
   /*定义相关方法*/
   methods: {
-    /**
-     *函数防抖
-     */
-    debounce(func, delay=500) {
-      let timeout = null;
-      return function (...args) {
-        if (timeout) {
-          clearTimeout(timeout);
-        }
-        timeout = setTimeout(() => {
-          func.apply(this, args);
-        }, delay);
-      }
-    },
     /**
      * 网络请求相关方法
      */

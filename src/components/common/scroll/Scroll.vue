@@ -14,15 +14,11 @@ export default {
   props: {
     probeType: {
       type: Number,
-      default() {
-        return 0
-      },
+      default: 0
     },
     pullUpLoad: {
       type: Boolean,
-      default() {
-        return false;
-      }
+      default: false
     }
   },
   data() {
@@ -38,30 +34,33 @@ export default {
       pullUpLoad: this.pullUpLoad
     });
     // 监听滚动的位置
-    this.scroll.on('scroll', (position) => {
-      // 将相关参数通过函数传给父组件
-      this.$emit('scroll', position)
-    });
-    // 监听加载更多
-    this.scroll.on('pullingUp', () => {
-      // 将相关参数通过函数传给父组件
-      this.$emit('pullingUp');
-    });
-
+    if (this.probeType === 2 || this.probeType === 3) {
+      this.scroll.on('scroll', (position) => {
+        // 将相关参数通过函数传给父组件
+        this.$emit('scroll', position)
+      });
+    }
+    // 监听scroll滚动到底部
+    if (this.pullUpLoad) {
+      this.scroll.on('pullingUp', () => {
+        // 将相关参数通过函数传给父组件
+        this.$emit('pullingUp');
+      });
+    }
   },
 
   methods: {
+    //better-scrollc返回定点的方法scrollTo（x,y,time）
     scrollTo(x, y, time = 300) {
-      //better-scrollc返回定点的方法scrollTo（x,y,time）
       this.scroll && this.scroll.scrollTo && this.scroll.scrollTo(x, y, time);
     },
+    //在监听到底部后调用可以再次监听底部
     finishPullUp() {
-      // 在加载一次之后调用这个可以再次加载更多
       this.scroll && this.scroll.finishPullUp && this.scroll.finishPullUp();
     },
+    //从新加载better-scrollc滚动高度
     refresh() {
       // console.log('111');
-      //从新加载better-scrollc滚动高度
       this.scroll && this.scroll.refresh && this.scroll.refresh();
     }
   }
