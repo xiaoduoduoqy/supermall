@@ -72,6 +72,10 @@ export default {
     this.getGoodsHomedata('pop');
     this.getGoodsHomedata('new');
     this.getGoodsHomedata('sell');
+    //3监听item中图片加载完成
+    this.$bus.$on('itemImageLoad',()=>{
+      this.$refs.aaa.refresh();
+    })
   },
   /*计算属性*/
   computed: {
@@ -163,6 +167,7 @@ export default {
   /*padding-top: 44px;*/
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 .home-nva {

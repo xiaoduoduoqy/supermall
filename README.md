@@ -31,18 +31,18 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 ## :pencil: 相关首页组件实现细节总结
-首页头部FeatureView
+####首页头部FeatureView
 1. 独立组件封装FeatureView
    1. div>a>img
 
-切换的TabControl
+####切换的TabControl
 1. pro>title
 2. div>根据title v-for 遍历 div>spen{{title}}
 3. css样式
 4. 选中哪一个tab，哪一个tab文字颜色改变，下面broder-bottom
    1. index选中相关数据的角标
 
-首页商品数据请求
+####首页商品数据请求
 1. 设计数据结构：
    1. goods：{
       pop：page/list
@@ -63,7 +63,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
                sell:page/list[30]
             }
 
-对商品数据进行展示
+####对商品数据进行展示
 1. 封装GoodsList.vue组件
    1. props:goodslist-->list[30]
       1. 通过TabControl组件里面的点击事件btnClick
@@ -80,7 +80,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
    1. props：goodItem
    2. goodItem：取出img/orgPrice/cfav/title,使用标签进行展示
 
-对滚东进行重构:Better-Scroll
+####对滚东进行重构:Better-Scroll
 1. Better-Scroll的基本使用
    1. const bscroll=new BScroll(el,{ })
    2. 注意:wapper-->content-->很多内容
@@ -99,7 +99,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
       1. Home.vue将probeType设置为3
       2. Scroll.vue需要通过$emit实时的将事件发送到Home.vue
 
-回到顶部BackTop
+####回到顶部BackTop
 1. 对BackTop.vue组件的封装
 2. 如何监听组件的点击事件
    1. 直接监听back-top的点击，但是可以直接监听？
@@ -113,4 +113,16 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
          1. position.y < -2000 -->isactive:ture
          2. position.y > -2000 -->isactive:false
 
+####解决首页中的Better-Scroll可滚动区域的问题
+1. Better-Scroll在决定有多少区域可以滚动时,是根据scrollerHeight属性决定
+   1. scrollerHeight属性是根据放Better-Scroll的content在子组件的高度
+   2. 但是我们的首页中，刚开始在计算scrollerHeight属性时,是没有将图片计算在内的
+   3. 所以计算出来的高度是错误的
+   4. 后来图片加载完成，导相关的高度变化，但是scrollerHeight属性没有进行更新
+   5. 所以滚动出现了相关问题
+2. 如何解决这个问题
+   1. 监听每一张图片是否加载完成，只要有一张图片加载完成了，就执行this.scroll.refresh();
+   2. 如何监听图片加载完成？
+      1. 原生元素的js监听图片:img.onload=function(){}
+      2. Vue中监听的refresh()
 

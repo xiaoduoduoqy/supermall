@@ -22,8 +22,10 @@ export default {
   },
   methods: {
     imageLoad() {
-      // 获取父组件的父组件的相关methods方法调用
-      this.$parent.$parent.refresh();
+      // 第一种:获取父组件的父组件的相关methods方法调用
+      // this.$parent.$parent.refresh();
+      //第二种:事件总线的方式
+      this.$bus.$emit('itemImageLoad');
     }
   }
 }
