@@ -22,7 +22,8 @@ export default {
   },
   methods: {
     imageLoad() {
-      this.$parent.refresh();
+      // 获取父组件的父组件的相关methods方法调用
+      this.$parent.$parent.refresh();
     }
   }
 }
