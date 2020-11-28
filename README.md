@@ -125,4 +125,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
    2. 如何监听图片加载完成？
       1. 原生元素的js监听图片:img.onload=function(){}
       2. Vue中监听的refresh()
+   3. 如何将GoodsListItme.vue中的事件传入到Home.vue中
+      1. 一种采用this.$parent.$parent.refresh()
+      2. 直接采用事件总线
+         1. bus-->总线
+         2. Vue.prototype.$bus=new Vue();
+         3. this.$bus.$emit('事件名称',参数)
+         4. this.$bus.$on('事件名称',回调函数(参数))
+      1.
 
