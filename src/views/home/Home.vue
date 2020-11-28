@@ -72,9 +72,13 @@ export default {
     this.getGoodsHomedata('pop');
     this.getGoodsHomedata('new');
     this.getGoodsHomedata('sell');
-    //3监听item中图片加载完成
-    this.$bus.$on('itemImageLoad',()=>{
-      this.$refs.aaa.refresh();
+  },
+  /*el已经渲染完成并挂载到实例上*/
+  mounted() {
+    //3监听item中图片加载完成加入防抖动
+    const refresh = this.debounce(this.$refs.aaa.refresh,50)
+    this.$bus.$on('itemImageLoad', () => {
+      refresh();
     })
   },
   /*计算属性*/
@@ -86,6 +90,20 @@ export default {
   },
   /*定义相关方法*/
   methods: {
+    /**
+     *函数防抖
+     */
+    debounce(func, delay=500) {
+      let timeout = null;
+      return function (...args) {
+        if (timeout) {
+          clearTimeout(timeout);
+        }
+        timeout = setTimeout(() => {
+          func.apply(this, args);
+        }, delay);
+      }
+    },
     /**
      * 网络请求相关方法
      */
@@ -99,7 +117,6 @@ export default {
         console.log(err);
       })
     },
-
     //2获取流行,新款，精选相关数据
     getGoodsHomedata(type) {
       const page = this.goods[type].page + 1;
@@ -138,12 +155,10 @@ export default {
     //   // 直接调用better-scroll里面methods里面的函数
     //   this.$refs.aaa.showMessage();
     // },
-
     // 但是我们可以直接采用native监听组件根元素的原生事件
     TopClick() {
       this.$refs.aaa.scrollTo(0, 0, 300);
     },
-
     // BScroll组件返回的函数
     backscroll(position) {
       // console.log(position);
@@ -153,6 +168,7 @@ export default {
         this.isactive = false;
       }
     },
+
     backpullingUp() {
       // console.log('加载更多');
       this.getGoodsHomedata(this.currentType);

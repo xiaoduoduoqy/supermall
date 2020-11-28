@@ -53,15 +53,16 @@ export default {
   methods: {
     scrollTo(x, y, time = 300) {
       //better-scrollc返回定点的方法scrollTo（x,y,time）
-      this.scroll.scrollTo(x, y, time);
+      this.scroll && this.scroll.scrollTo && this.scroll.scrollTo(x, y, time);
     },
     finishPullUp() {
       // 在加载一次之后调用这个可以再次加载更多
-      this.scroll.finishPullUp();
+      this.scroll && this.scroll.finishPullUp && this.scroll.finishPullUp();
     },
     refresh() {
+      // console.log('111');
       //从新加载better-scrollc滚动高度
-      this.scroll.refresh();
+      this.scroll && this.scroll.refresh && this.scroll.refresh();
     }
   }
 }
