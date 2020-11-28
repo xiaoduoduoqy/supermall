@@ -132,5 +132,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
          2. Vue.prototype.$bus=new Vue();
          3. this.$bus.$emit('事件名称',参数)
          4. this.$bus.$on('事件名称',回调函数(参数))
-      1.
+   4. 对于refresh非常频繁的问题，进行防抖操作
+      1. 防抖debounce/节流throttle
+
 
