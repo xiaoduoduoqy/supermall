@@ -3,17 +3,27 @@
     <nav-bar class="home-nva">
       <div slot="center">购物街</div>
     </nav-bar>
-
+    <tab-control
+      class="tabControl"
+      v-show="isTabFixed"
+      :tabtitle="['流行', '新款', '精选']"
+      @tabClick="backtabClick"
+      ref="tabControl"></tab-control>
     <scroll class="content"
             ref='aaa'
             :probe-type="3"
             :pull-up-load="true"
             @scroll="backscroll"
             @pullingUp="backpullingUp">
-      <home-swiper :banners="banners"></home-swiper>
+      <home-swiper :banners="banners"
+                   @swiperImageLoad="backswiperImageLoad"></home-swiper>
       <recommend-view :recommends="recommends"></recommend-view>
       <home-feature-view></home-feature-view>
-      <tab-control class="home-tab-control" :tabtitle="['流行', '新款', '精选']" @tabClick="backtabClick"></tab-control>
+      <tab-control
+        v-show="!isTabFixed"
+        :tabtitle="['流行', '新款', '精选']"
+        @tabClick="backtabClick"
+        ref="tabControl"></tab-control>
       <goods-list :goodslist="showGoodsData"></goods-list>
     </scroll>
     <!--采用子组件的返回方法-->
@@ -62,7 +72,9 @@ export default {
         'sell': {page: 0, list: []}
       },
       currentType: 'pop',//默认当前类型
-      isactive: false
+      isactive: false,
+      tabOffsetTop: 0,
+      isTabFixed: false,
     }
   },
   /*组件创建成功的钩子函数*/
@@ -76,8 +88,8 @@ export default {
   },
   /*el已经渲染完成并挂载到实例上*/
   mounted() {
-    //3监听item中图片加载完成加入防抖动
-    const refresh = debounce(this.$refs.aaa.refresh,50)
+    //1监听item中图片加载完成加入防抖动
+    const refresh = debounce(this.$refs.aaa.refresh, 50)
     this.$bus.$on('itemImageLoad', () => {
       refresh();
     })
@@ -148,19 +160,25 @@ export default {
     },
     // BScroll组件返回的函数
     backscroll(position) {
-      // console.log(position);
+      //1判断backtop是否显示
       if (position.y < -2000) {
         this.isactive = true;
       } else {
         this.isactive = false;
       }
+      //2.决定tabControl是不是吸顶(posstition:fixed)
+      this.isTabFixed = (-position.y) > this.tabOffsetTop-44;
     },
-
     backpullingUp() {
       // console.log('加载更多');
       this.getGoodsHomedata(this.currentType);
       this.$refs.aaa.finishPullUp();
-    }
+    },
+    //加载tab-control组件的offsetTop
+    backswiperImageLoad() {
+      this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop;
+      console.log(this.tabOffsetTop);
+    },
   }
 }
 </script>
@@ -176,19 +194,13 @@ export default {
 .home-nva {
   background-color: var(--color-tint);
   color: #ffffff;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 9;
+  /*position: fixed;*/
+  /*left: 0;*/
+  /*right: 0;*/
+  /*top: 0;*/
+  /*z-index: 9;*/
 }
 
-.home-tab-control {
-  /*两个要混合使用*/
-  position: sticky;
-  top: 44px; /*顶部navbar的高度*/
-  z-index: 9;
-}
 
 /*.content {*/
 /*  overflow: hidden;*/
@@ -202,7 +214,10 @@ export default {
 .content {
   overflow: hidden;
   height: calc(100% - 93px);
-  margin-top: 44px;
+  /*margin-top: 44px;*/
 }
-
+/*.tabControl{*/
+/*  position: relative;*/
+/*  z-index: 9;*/
+/*}*/
 </style>
