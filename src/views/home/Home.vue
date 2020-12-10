@@ -143,8 +143,8 @@ export default {
           this.currentType = 'sell'
           break;
       }
-      this.$refs.tabControl2.isactive=index;
-      this.$refs.tabControl1.isactive=index;
+      this.$refs.tabControl2.isactive = index;
+      this.$refs.tabControl1.isactive = index;
     },
     //back-top组件返回的函数
     // backTop() {
@@ -169,7 +169,7 @@ export default {
         this.isactive = false;
       }
       //2.决定tabControl是不是吸顶(posstition:fixed)
-      this.isTabFixed = (-position.y) > this.tabOffsetTop-44;
+      this.isTabFixed = (-position.y) > this.tabOffsetTop - 44;
     },
     backpullingUp() {
       // console.log('加载更多');
@@ -218,6 +218,7 @@ export default {
   height: calc(100% - 93px);
   /*margin-top: 44px;*/
 }
+
 /*.tabControl{*/
 /*  position: relative;*/
 /*  z-index: 9;*/
