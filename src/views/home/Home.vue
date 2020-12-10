@@ -8,7 +8,7 @@
       v-show="isTabFixed"
       :tabtitle="['流行', '新款', '精选']"
       @tabClick="backtabClick"
-      ref="tabControl"></tab-control>
+      ref="tabControl1"></tab-control>
     <scroll class="content"
             ref='aaa'
             :probe-type="3"
@@ -23,7 +23,7 @@
         v-show="!isTabFixed"
         :tabtitle="['流行', '新款', '精选']"
         @tabClick="backtabClick"
-        ref="tabControl"></tab-control>
+        ref="tabControl2"></tab-control>
       <goods-list :goodslist="showGoodsData"></goods-list>
     </scroll>
     <!--采用子组件的返回方法-->
@@ -143,6 +143,8 @@ export default {
           this.currentType = 'sell'
           break;
       }
+      this.$refs.tabControl2.isactive=index;
+      this.$refs.tabControl1.isactive=index;
     },
     //back-top组件返回的函数
     // backTop() {
@@ -176,8 +178,8 @@ export default {
     },
     //加载tab-control组件的offsetTop
     backswiperImageLoad() {
-      this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop;
-      console.log(this.tabOffsetTop);
+      this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop;
+      // console.log(this.tabOffsetTop);
     },
   }
 }
