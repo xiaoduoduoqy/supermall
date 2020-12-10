@@ -75,6 +75,8 @@ export default {
       isactive: false,
       tabOffsetTop: 0,
       isTabFixed: false,
+      homeOffsetTop:0,
+      text:0,
     }
   },
   /*组件创建成功的钩子函数*/
@@ -86,6 +88,9 @@ export default {
     this.getGoodsHomedata('new');
     this.getGoodsHomedata('sell');
   },
+  destroyed() {//组件销毁回调函数
+    console.log('组件销毁回调函数');
+  },
   /*el已经渲染完成并挂载到实例上*/
   mounted() {
     //1监听item中图片加载完成加入防抖动
@@ -93,6 +98,13 @@ export default {
     this.$bus.$on('itemImageLoad', () => {
       refresh();
     })
+  },
+  /*这两个activated和deactivated只有该组件使用了keep-alive时，这两个函数才是有效的*/
+  activated() {//组件活跃状态回调函数
+    this.$refs.aaa.scrollTo(0,this.text,0);
+  },
+  deactivated() {//组件界面处于不活跃状态函数
+    this.text=this.homeOffsetTop;
   },
   /*计算属性*/
   computed: {
@@ -170,6 +182,9 @@ export default {
       }
       //2.决定tabControl是不是吸顶(posstition:fixed)
       this.isTabFixed = (-position.y) > this.tabOffsetTop - 44;
+      //3.确定相关图片的home前位置
+      this.homeOffsetTop=position.y;
+      console.log(position.y);
     },
     backpullingUp() {
       // console.log('加载更多');
