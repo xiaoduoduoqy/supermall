@@ -62,6 +62,10 @@ export default {
     refresh() {
       // console.log('111');
       this.scroll && this.scroll.refresh && this.scroll.refresh();
+    },
+    // 获取当前组件的y的值
+    getScrollY() {
+      return this.scroll ? this.scroll.y : 0;
     }
   }
 }
