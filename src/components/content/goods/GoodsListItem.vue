@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-list-item">
+  <div class="goods-list-item" @click="itemClick">
     <img :src="goodItem.show.img" alt="" @load="imageLoad">
     <div class="goods-info">
       <p>{{ goodItem.title }}</p>
@@ -26,6 +26,18 @@ export default {
       // this.$parent.$parent.refresh();
       //第二种:事件总线的方式
       this.$bus.$emit('itemImageLoad');
+    },
+    itemClick() {
+      // console.log('跳转详情页面');
+      //第一种动态方式
+      this.$router.push('/detail/' +this.goodItem.iid);
+      //第二种query，但是在路由的index.js里面不需要再进行相关配置
+      // this.$router.push({
+      //   path: '/detail',
+      //   query: {
+      //     id: id
+      //   }
+      // });
     }
   }
 }

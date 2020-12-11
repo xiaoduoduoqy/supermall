@@ -102,6 +102,7 @@ export default {
   /*这两个activated和deactivated只有该组件使用了keep-alive时，这两个函数才是有效的*/
   activated() {//组件活跃状态回调函数
     this.$refs.aaa.scrollTo(0, this.saveY, 0);
+    this.$refs.aaa.refresh();
   },
   deactivated() {//组件界面处于不活跃状态函数
     this.saveY = this.$refs.aaa.getScrollY();
