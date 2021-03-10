@@ -1,6 +1,6 @@
 <template>
   <!--启用下面代码就需要启用定义一个事件将相关数据返回给父组件-->
-  <!--<div class="back-top" @cli="btnClckick">-->
+  <!--<div class="back-top" @click="btnClckick">-->
     <div class="back-top" >
     <img src="~assets/img/common/top.png" alt="">
   </div>
