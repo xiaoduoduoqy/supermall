@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive exclude="Detail">
+    <keep-alive exclude="Detail"><!--exclude排除路由Detail需要刷新-->
       <router-view></router-view>
     </keep-alive>
     <mian-tabbar></mian-tabbar>
