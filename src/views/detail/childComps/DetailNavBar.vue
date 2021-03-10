@@ -2,7 +2,7 @@
   <div>
     <nav-bar class="home-nva">
       <div slot="left" class="back" @click="backClick">
-        <img src="~assert/img/common/back.svg" alt="">
+        <img src="~assets/img/common/back.svg" alt="">
       </div>
       <div slot="center" class="title">
         <div v-for="(itme, index) in title"
