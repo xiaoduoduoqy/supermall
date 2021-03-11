@@ -7,7 +7,7 @@ export function getDetailData(id) {
   return request({
     url: '/detail',
     params: {
-      id: id,
+      iid: id,
     }
   })
 }
@@ -18,11 +18,11 @@ export class Goods {
     this.title = itemInfo.title;
     this.desc = itemInfo.desc;
     this.newPrice = itemInfo.price;
-    this.oldPrice = itemInfo.OldPrice;
+    this.oldPrice = itemInfo.oldPrice;
     this.discount = itemInfo.discountDesc;
     this.columns = columns;
     this.services = services;
-    this.realPrice = itemInfo.lowNowprice;
+    this.realPrice = itemInfo.lowNowPrice;
   }
 }
 

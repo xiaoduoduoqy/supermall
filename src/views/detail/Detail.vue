@@ -32,18 +32,20 @@ export default {
   },
   created() {
     //保存传入进来的商品ID
-    this.iid = this.$router.params.iid;
+    this.iid = this.$route.params.iid;
+    console.log(this.iid)
     //根据ID获取详数据
     this.getDetail(this.iid);
   },
   methods: {
     getDetail(id) {
       getDetailData(id).then(ref => {
-        const data = ref.resule;
+        const data = ref.result;
         //顶部轮播数据相关图片
-        this.topImages = ref.resule.itemInfo.topImages;
+        this.topImages = ref.result.itemInfo.topImages;
         //商品详细数据
-        this.goods = new Goods(data.itemInfo, data.columns, data.services)
+        this.goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
+        console.log(this.goods);
         //商店的相关数据
         this.shop = new Shop(data.shopInfo);
       }).catch(err => {
