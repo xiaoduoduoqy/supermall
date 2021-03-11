@@ -7,9 +7,9 @@
       <span class="discount" v-if="goods.discount">{{ goods.discount }}</span>
     </div>
     <div class="info-other">
-      <span>{{ goods.columns[0] }}</span>
-      <span>{{ goods.columns[1] }}</span>
-      <span>{{ goods.services[goods.services.length - 1].name }}</span>
+      <span class="other-left">{{ goods.columns[0] }}</span>
+      <span class="other-center">{{ goods.columns[1] }}</span>
+      <span class="other-right">{{ goods.services[goods.services.length - 1].name }}</span>
     </div>
     <div class="info-service">
       <span class="info-service-item" v-for="index in goods.services.length - 1" :key="index"><!--遍历相关数据-->
@@ -86,14 +86,25 @@ export default {
   flex: 1;
 }
 
+.other-left {
+  text-align: left;
+}
+
+.other-center {
+  text-align: center;
+}
+
+.other-right {
+  text-align: right;
+}
+
 .info-service {
   display: flex;
   font-size: 12px;
   color: #333;
   padding: 10px 4px;
   justify-content: space-between;
-  border-bottom: 4px solid #ededed;
-
+  border-bottom: 1px solid #ededed;
 }
 
 .info-service img {
