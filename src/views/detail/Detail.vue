@@ -10,6 +10,7 @@
       <detail-shop-info :shop="shop"></detail-shop-info>
       <detail-goods-info :detail-info="detailInfo" @imageLoad="imgLoad"></detail-goods-info>
       <detail-params-info :item-params="itemParams"></detail-params-info>
+      <detail-comment-info :comment-info="commentInfo"></detail-comment-info>
     </scroll>
   </div>
 </template>
@@ -21,6 +22,7 @@ import DetailBaseInfo from "./childComps/DetailBaseInfo";
 import DetailShopInfo from "./childComps/DetailShopInfo";
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo";
 import DetailParamsInfo from "./childComps/DetailParamsInfo";
+import DetailCommentInfo from "./childComps/DetailCommentInfo";
 
 import Scroll from "components/common/scroll/Scroll";
 
@@ -36,6 +38,7 @@ export default {
     DetailShopInfo,
     DetailGoodsInfo,
     DetailParamsInfo,
+    DetailCommentInfo,
     Scroll
   },
   data() {
@@ -45,7 +48,8 @@ export default {
       goods: {},
       shop: {},
       detailInfo: {},
-      itemParams: {}
+      itemParams: {},
+      commentInfo: {}
     }
   },
   created() {
@@ -63,14 +67,16 @@ export default {
         this.topImages = ref.result.itemInfo.topImages;
         //商品详细数据
         this.goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
-        // console.log(this.goods);
         //商店的相关数据
         this.shop = new Shop(data.shopInfo);
         //获取商品详情信息
         this.detailInfo = data.detailInfo;
         //获取商品参数信息
         this.itemParams = data.itemParams;
-        console.log(data);
+        //获取评论信息
+        if (data.rate.cRate !== 0) {
+          this.commentInfo = data.rate.list[0];
+        }
       }).catch(err => {
         console.log(err + '相关数据没有取到');
       })
