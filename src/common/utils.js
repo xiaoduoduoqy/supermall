@@ -61,7 +61,7 @@ export function throttle2(fn, delay = 1000) {
 }
 
 /**
- * 时间格式方法
+ * 时间格式方法1
  *
  * @param {any} timeStamp  时间戳，秒级/毫秒级
  * @param {any} type 格式化时间类型，默认  Y-M-D H:I:S
@@ -148,4 +148,47 @@ export function formatDate(timeStamp, type = 'Y-M-D H:I:S', auto = false) {
   }
   // 返回格式化的日期字符串
   return formatTime;
+}
+
+/**
+ * 时间格式方法2
+ * @param date
+ * @param fmt
+ */
+export function formatDate2(date, fmt) {
+  date = (typeof date === 'number' || typeof date === 'string') ? new Date(date) : date;
+  fmt = fmt || 'yyyy-MM-dd HH:mm:ss';
+  //1.获取年份
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
+  }
+  //2获取
+  var o = {
+    'M+': date.getMonth() + 1, // 月份
+    'd+': date.getDate(), // 日
+    'h+': date.getHours() % 12 === 0 ? 12 : date.getHours() % 12, // 小时
+    'H+': date.getHours(), // 小时
+    'm+': date.getMinutes(), // 分
+    's+': date.getSeconds(), // 秒
+    'q+': Math.floor((date.getMonth() + 3) / 3), // 季度
+    'S': date.getMilliseconds() // 毫秒
+  };
+  var week = {
+    '0': '\u65e5',
+    '1': '\u4e00',
+    '2': '\u4e8c',
+    '3': '\u4e09',
+    '4': '\u56db',
+    '5': '\u4e94',
+    '6': '\u516d'
+  };
+  if (/(E+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? '\u661f\u671f' : '\u5468') : '') + week[date.getDay() + '']);
+  }
+  for (var k in o) {
+    if (new RegExp('(' + k + ')').test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+    }
+  }
+
 }
