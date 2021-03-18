@@ -111,5 +111,6 @@ export default {
   width: 12px;
   height: 12px;
   vertical-align: middle;
+  border-radius: 50%;
 }
 </style>
