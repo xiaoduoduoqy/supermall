@@ -9,6 +9,7 @@
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shop"></detail-shop-info>
       <detail-goods-info :detail-info="detailInfo" @imageLoad="imgLoad"></detail-goods-info>
+      <detail-params-info :item-params="itemParams"></detail-params-info>
     </scroll>
   </div>
 </template>
@@ -19,6 +20,7 @@ import DetailSwiper from "./childComps/DetailSwiper";
 import DetailBaseInfo from "./childComps/DetailBaseInfo";
 import DetailShopInfo from "./childComps/DetailShopInfo";
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo";
+import DetailParamsInfo from "./childComps/DetailParamsInfo";
 
 import Scroll from "components/common/scroll/Scroll";
 
@@ -33,6 +35,7 @@ export default {
     DetailBaseInfo,
     DetailShopInfo,
     DetailGoodsInfo,
+    DetailParamsInfo,
     Scroll
   },
   data() {
@@ -41,7 +44,8 @@ export default {
       topImages: [],
       goods: {},
       shop: {},
-      detailInfo: {}
+      detailInfo: {},
+      itemParams: {}
     }
   },
   created() {
@@ -64,7 +68,9 @@ export default {
         this.shop = new Shop(data.shopInfo);
         //获取商品详情信息
         this.detailInfo = data.detailInfo;
-
+        //获取商品参数信息
+        this.itemParams = data.itemParams;
+        console.log(data);
       }).catch(err => {
         console.log(err + '相关数据没有取到');
       })
